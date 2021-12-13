@@ -10,6 +10,7 @@ from .defaults import EXAMPLE_EVENT
 
 @pytest.mark.asyncio
 async def test_no_bot_middleware():
+    """Тестирование NoBotMiddleware"""
     BOT_EVENT = MessageNew(**EXAMPLE_EVENT.copy()).object.message
     BOT_EVENT.from_id = -1234
 
@@ -25,6 +26,7 @@ async def test_no_bot_middleware():
 
 @pytest.mark.asyncio
 async def test_prepare_command_middleware():
+    """Тестирование подготовки команды"""
     FIRST_TEXT_EVENT = MessageNew(**EXAMPLE_EVENT.copy()).object.message
     FIRST_TEXT_EVENT.text = "!cmd"
     FIRST_TEXT_EVENT_EXPECTED = "/cmd"

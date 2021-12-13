@@ -9,6 +9,7 @@ from .defaults import EXAMPLE_CONFIG, EXAMPLE_EVENT, get_config
 
 @pytest.mark.asyncio
 async def test_admin_rule():
+    """Тестирование AdminRule"""
     config = get_config(config=EXAMPLE_CONFIG)
     NORMAL_EVENT = MessageNew(**EXAMPLE_EVENT.copy()).object.message
     WRONG_EVENT = MessageNew(**EXAMPLE_EVENT.copy()).object.message
