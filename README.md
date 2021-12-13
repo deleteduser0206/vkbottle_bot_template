@@ -68,6 +68,10 @@ python -m venv venv
 source venv/bin/activate
 ```
 ```shell
+# Установка poetry, если вы этого не сделали
+python -m pip install poetry
+
+# Создаём виртуальное окружение
 make venv
 ```
 
