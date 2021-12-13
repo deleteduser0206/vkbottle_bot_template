@@ -1,0 +1,70 @@
+[tool.poetry]
+name = "vkbottle_bot_template"
+version = "0.0.1"
+description = "Шаблон бота на фреймворке VKBottle 4.x с кэшем, основанным на redis, базой данных, возможностью запуска через Docker и установкой прокси для запросов к API."
+authors = ["deleteduser0206@gmail.com"]
+
+[tool.poetry.dependencies]
+python = "^3.7.2"
+
+# Aiohttp
+aiohttp = "^3.8.0"
+aiohttp-socks = "^0.7.1"
+
+# VKBottle
+vkbottle = "^4.0.1"
+vkbottle-types = {url = "https://github.com/timoniq/vkbottle-types/archive/master.zip"}
+loguru = "^0.5.3"
+
+# Config
+PyYAML = "^6.0"
+types-PyYAML = "^6.0.1"
+
+# Database
+aiomysql = "^0.0.22"
+SQLAlchemy = "^1.4.27"
+
+# Cache
+aioredis = "^2.0.0"
+
+# For fast work
+orjson = "^3.6.4"
+types-orjson = "^3.6.1"
+uvloop = "^0.16.0"
+
+[tool.poetry.dev-dependencies]
+
+# Lint
+black = { version = "^21.10b0", allow-prereleases = true }
+mypy = "^0.910"
+mypy-extensions = "^0.4.3"
+isort = "^5.10.1"
+autoflake = "^1.4"
+flake8 = "^4.0.1"
+
+# Tests
+pytest = "^6.2.5"
+pytest-asyncio = "^0.16.0"
+
+# Pre-commit
+pre-commit = "^2.15.0"
+
+# Other
+ipython = "^7.30.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.mypy]
+python_version = 3.8
+ignore_missing_imports = true
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = true
+line_length = 99
+
+[tool.black]
+target-version = ['py37', 'py38', 'py39', 'py310']
+line-length = 99

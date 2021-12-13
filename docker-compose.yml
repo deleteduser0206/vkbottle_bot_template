@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  bot:
+    container_name: bot
+    build: .
+    restart: on-failure
+    ports:
+      - "6342:6342"
+
+    depends_on:
+      - db
+      - redis
+      - proxy
+
+    links:
+      - "db:db"
+      - "redis:redis"
+      - "proxy:proxy"
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin:latest
+    restart: on-failure
+    ports:
+      - "8080:80"
+
+    depends_on:
+      - db
+
+    links:
+      - "db:db"
+
+  db:
+    container_name: mysql
+    image: mariadb:bionic
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    environment:
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1
+      MYSQL_DATABASE: vkbottle_bot_template
+      MYSQL_RANDOM_ROOT_PASSWORD: da
+
+    command:
+      - --default-authentication-plugin=mysql_native_password
+
+  redis:
+    container_name: redis-cache
+    image: redis:alpine
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - redis_data:/data
+      - ./docker/redis.conf:/usr/local/etc/redis/redis.conf
+
+  proxy:
+    container_name: opera-proxy
+    image: yarmak/opera-proxy
+
+volumes:
+  mysql_data:
+  redis_data:

@@ -1,0 +1,115 @@
+bot:
+    # API токен(ы).
+    # Если необходимо использовать несколько токенов для обхода флуд контроля, запишите их в виде:
+    # token:
+    #     - FirstToken
+    #     - SecondToken
+    token:
+        - 3970d0eae20d9bb151da4932df3cfed78b249f5f61fa3802660404f984323c009fc70677275eb7cacaf81c
+        - 533bacf01e1165b57531ad114461ae8736d6506a36673b3824648accac393846582638cfac81948adc743c
+
+    # Администраторы бота. Будут доступны некоторые команды. ИДы писать только цифрами.
+    admins:
+        - 1
+
+    # Прокси.
+    proxy: null
+
+    callback:
+        # Если true - используется callback, иначе - longpoll.
+        status: false
+
+        # Хост.
+        host: 0.0.0.0
+        # Порт.
+        port: 80
+
+        # Путь для прослушивания.
+        path: /
+
+        # Секретный ключ, если не указан будет подобран сам.
+        secret: null
+
+database:
+    # Адрес базы данных.
+    host: 127.0.0.1
+    # Порт базы данных.
+    port: 3306
+
+    # Имя пользователя.
+    user: admin
+    # Пароль пользователя.
+    password: super_secret_password_for_mysql
+
+    # Название создаваемой базы данных. Не путать с dialect.
+    database: vkbottle_bot_template
+
+    # Имя базы данных (mysql, postgresql и т.д).
+    dialect: mysql
+    # DB API (aiomysql, asyncpg). null - использование стандартного драйвера.
+    driver: aiomysql
+
+    # Фикс авто инкремента, в поле id устанавливается наименьшее доступное значение при регистрации пользователя. (Может повлиять на производительность)
+    fix_auto_increment: false
+
+    # Если установлен, игнорируются параметры: host, port, url
+    unix_socket: null
+
+    # Если установлен, игнорируются параметры: host, port, user, pass, database, dialect, driver, unix_socket
+    url: null
+
+    redis:
+        # Использовать redis для кэша?
+        cache: false
+
+        # Адрес базы данных.
+        host: 127.0.0.1
+        # Порт базы данных.
+        port: 6379
+
+        # Имя пользователя.
+        user: username
+        # Пароль пользователя.
+        password: super_secret_password_for_redis
+
+        # Индекс(число) базы данных.
+        database: 0
+
+        # Если установлен, игнорируются параметры: host, port, url
+        unix_socket: null
+
+        # Если установлен, игнорируются параметры: host, port, user, password, database, unix_socket
+        url: null
+
+        # Время в секундах, через которое запись в БД будет удалена.
+        time_to_del: 86400
+
+
+logging:
+    # Включить логирование всех уровней?
+    log: false
+    # Включить логирование всех ошибок?
+    log_errors: false
+    # Включить логирование в консоль?
+    log_console: true
+
+    # Путь записи логов всех уровней.
+    log_path: logs/%Y-%M-%d_%H-%M-%S.log
+    # Путь записи логов с ошибками.
+    log_errors_path: logs/%Y-%M-%d_%H-%M-%S-error.log
+
+environment:
+    # Включить замену переменных?
+    status: false
+
+    # Значения для переноса из переменных окружения, в конфиг.
+    # Синтаксис:
+    # bot: <- Словарь
+    #       token: vk_token <- Заменяемое значение: Значение в переменных окружения для замены.
+    # Пример:
+    # translate:
+    #       bot:
+    #           token: vk_token
+    translate:
+        bot:
+            token: vk_token
