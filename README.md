@@ -98,7 +98,7 @@ make install-dev
 # Для установки дев зависимостей
 ```
 
-4. Переименовать/скопировать **config.yml.example** в **config.yml** и настроить его.
+4. Переименовать/скопировать **config.example.yml** в **config.yml** и настроить его.
 
 ```shell
 # Копируем config.example.yml
