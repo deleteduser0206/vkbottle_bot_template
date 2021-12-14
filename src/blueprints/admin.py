@@ -11,6 +11,7 @@ bp.labeler.auto_rules.append(IsAdminRule())
 
 @bp.on.message(text="/stop_polling")
 async def stop_polling_handler(_):
+    """Останавливает polling"""
     from src.app import bot
 
     bot._polling.stop = True  # noqa
