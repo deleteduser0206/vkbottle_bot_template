@@ -64,9 +64,9 @@ class Bot(ABCFramework):
         выдаёт предупреждение в консоль
         """
         try:
-            from aiohttp.client import ClientSession  # pylint: disable=C0415
-            from aiohttp_socks.connector import ProxyConnector  # pylint: disable=C0415
-            from vkbottle.http.aiohttp import AiohttpClient  # pylint: disable=C0415
+            from aiohttp.client import ClientSession
+            from aiohttp_socks.connector import ProxyConnector
+            from vkbottle.http.aiohttp import AiohttpClient
         except ModuleNotFoundError:
             logger.warning(
                 "Прокси не был установлен, так как зависимость 'aiohttp-socks' не найдена"
