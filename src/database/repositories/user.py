@@ -42,7 +42,8 @@ class UserRepository:
         except IntegrityError:
             return False
 
-        except Exception:  # noqa
+        except Exception as exc:
+            logger.exception(exc)
             return False
 
     async def unregister(self):
