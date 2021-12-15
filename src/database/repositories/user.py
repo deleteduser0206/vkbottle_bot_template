@@ -20,13 +20,8 @@ class UserRepository:
     async def register(self, ctx_api: Union[API, ABCAPI]) -> bool:
         """Регистрация пользователя в базе данных"""
 
-        if redis:
-            async with redis.client() as conn:
-                if await conn.get(f"full_user_info_{self.uid}") or await self.get_full_user_info():
-                    return False
-        else:
-            if await self.get_full_user_info():
-                return False
+        if await self.get_full_user_info():
+            return False
 
         try:
             if config.database.fix_auto_increment:
