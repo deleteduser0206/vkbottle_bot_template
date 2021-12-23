@@ -99,5 +99,5 @@ environment:
 
 def get_config(config: str) -> ConfigModel:
     """Преобразование yaml в ConfigModel словарь"""
-    _config = ConfigModel(**yaml.load(config, YamlLoader))
-    return _config
+    config_ = ConfigModel(**yaml.load(config, YamlLoader))
+    return config_
