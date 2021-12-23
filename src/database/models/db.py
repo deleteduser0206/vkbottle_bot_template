@@ -4,8 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.ext.declarative import declarative_base
 
 from src.configurator import config
-from src.modules import logger
-from src.utils import loop
 
 if not config.database.url:
     config.database.url = (
@@ -23,23 +21,6 @@ if not config.database.url:
 engine = create_async_engine(config.database.url)
 Base = declarative_base(bind=engine)
 session = AsyncSession(bind=engine)
-
-
-async def check_connection():
-    """
-    Проверка подключения с базой данных,
-    если произошла ошибка при попытке подключения,
-    в консоль отправляется traceback и скрипт выключается
-    """
-    async with session as conn:
-        try:
-            await conn.execute("SELECT 1;")
-        except Exception as e:
-            logger.exception(e)
-            exit()
-
-
-loop.run_until_complete(check_connection())
 
 __all__ = (
     "Base",
