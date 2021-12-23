@@ -14,7 +14,7 @@ async def confirmation_handler(req: Request):
     Проверяет, что клиент отправил строку,
     которая является {"type": "confirmation"}, то возвращает ему ответ в виде строки,
     её можно получить с помощью запроса к VK API,
-    она необходима для подтверждения веб-сервера
+    она необходима для подтверждения веб-сервера.
     """
     try:
         data = await req.json(loads=json.loads)
@@ -47,7 +47,7 @@ async def route_event_handler(req: Request):
 
     if data.get("secret"):
 
-        async def _():
+        async def check_secret_temp():
             if config.bot.callback.secret == data.get("secret"):
                 await bot.router.route(event=data, ctx_api=bot.api)
                 return Response(text="ok")
@@ -55,14 +55,14 @@ async def route_event_handler(req: Request):
             return Response(status=400, text="error")
 
         if config.bot.callback.secret:
-            await _()
+            await check_secret_temp()
         else:
             config.bot.callback.secret = (
                 (await bot.api.groups.get_callback_servers(group_id=config.bot.info.group_id))
                 .items[0]
                 .secret_key
             )
-            await _()
+            await check_secret_temp()
     else:
         if config.bot.callback.secret:
             return Response(status=400, text="error")
