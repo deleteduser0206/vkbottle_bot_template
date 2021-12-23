@@ -103,7 +103,7 @@ class UserRepository:
 
     @staticmethod
     def prepared_info(user: Optional[User]) -> str:
-        """Получает сырую информацию о пользователе и возвращает в красивом виде"""
+        """Принимает сырую информацию о пользователе и возвращает её в красивом виде"""
         if user:
             return (
                 f"ID: {user.uid}\n"

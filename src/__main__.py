@@ -9,7 +9,7 @@ from src.utils import loop
 
 
 def main():
-    """Функция для запуска задач, приложений"""
+    """Начальная функция для запуска всех необходимых приложений, задач"""
     if config.bot.proxy:
         bot.set_proxy(proxy=config.bot.proxy)
 

@@ -145,7 +145,7 @@ def get_abs_path(file: str, name_config_file: str):
 
 
 def enable_file_logging(file: str, level: Union[str, int], *args, **kwargs) -> int:
-    """Активирует дублирование текста из консоли, в файл"""
+    """Активирует дублирование логов из консоли, в файл"""
     file_ = Path(file)
     if file_.parents[0].is_dir() and file_.parents[0].exists():
         return logger.add(datetime.now().strftime(file), level=level, *args, **kwargs)
