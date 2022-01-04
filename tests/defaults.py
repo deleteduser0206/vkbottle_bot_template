@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-import yaml
-
-from src.configurator import ConfigModel
-from src.modules import YamlLoader
 
 EXAMPLE_EVENT = {
     "type": "message_new",
@@ -89,15 +85,54 @@ logging:
     log_console: true
     log_path: logs/%Y-%M-%d_%H-%M-%S.log
     log_errors_path: logs/%Y-%M-%d_%H-%M-%S-error.log
-environment:
-    status: false
-    translate:
-        bot:
-            token: vk_token
 """
 
+EXAMPLE_CONFIG_WITH_ENVIRONMENT_VALUES = """
+bot:
+    token:
+        - FirstToken
+        - SecondToken
+        - ${first_environment_token}
+        - ${second_environment_token}
+    admins:
+        - 1
+        - 2
+        - 3
+        - 4
+    proxy: socks5://some_socks5_proxy:1234
+    callback:
+        status: true
+        host: 0.0.0.0
+        port: 6342
+        path: /some_path
+        secret: some_secret_key
 
-def get_config(config: str) -> ConfigModel:
-    """Преобразование yaml в ConfigModel словарь"""
-    config_ = ConfigModel(**yaml.load(config, YamlLoader))
-    return config_
+database:
+    host: 127.0.0.1
+    port: 3306
+    user: some_username
+    password: some_password
+    database: vkbottle_bot_template
+    dialect: mysql
+    driver: aiomysql
+    fix_auto_increment: false
+    unix_socket: some_unix_socket
+    url: some_url
+
+    redis:
+        cache: true
+        host: 127.0.0.1
+        port: 6379
+        user: some_username
+        password: some_password
+        database: 0
+        unix_socket: some_unix_socket
+        url: some_url
+        time_to_del: 86400
+logging:
+    log: true
+    log_errors: true
+    log_console: true
+    log_path: logs/%Y-%M-%d_%H-%M-%S.log
+    log_errors_path: logs/%Y-%M-%d_%H-%M-%S-error.log
+"""

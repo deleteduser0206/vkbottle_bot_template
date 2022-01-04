@@ -2,15 +2,16 @@
 import pytest
 from vkbottle_types.events.bot_events import MessageNew
 
+from src.configurator import get_config
 from src.rules import IsAdminRule
 
-from .defaults import EXAMPLE_CONFIG, EXAMPLE_EVENT, get_config
+from .defaults import EXAMPLE_CONFIG, EXAMPLE_EVENT
 
 
 @pytest.mark.asyncio
 async def test_admin_rule():
     """Тестирование AdminRule"""
-    config = get_config(config=EXAMPLE_CONFIG)
+    config = get_config(string=EXAMPLE_CONFIG)
     NORMAL_EVENT = MessageNew(**EXAMPLE_EVENT.copy()).object.message
     WRONG_EVENT = MessageNew(**EXAMPLE_EVENT.copy()).object.message
     WRONG_EVENT.from_id = -4321

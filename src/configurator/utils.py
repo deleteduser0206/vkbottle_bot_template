@@ -10,13 +10,17 @@ from src.modules import YamlLoader
 from src.modules import logger as project_logger
 
 
-def get_config(file: str) -> ConfigModel:
-    with open(file, "r") as f:
-        yaml_config: str = f.read()
+def get_config_from_file(filename: Union[str, bytes, os.PathLike]) -> ConfigModel:
+    with open(filename, "r") as f:
+        config = get_config(f.read())
         f.close()
-        yaml_config: str = remove_comments_from_string(yaml_config)  # type: ignore
-        yaml_config: str = replace_value_to_environment(yaml_config)  # type: ignore
-        dict_config: dict = yaml.load(yaml_config, YamlLoader)
+    return config
+
+
+def get_config(string: Union[str, bytes]) -> ConfigModel:
+    yaml_config: str = remove_comments_from_string(string)  # type: ignore
+    yaml_config: str = replace_value_to_environment(yaml_config)  # type: ignore
+    dict_config: dict = yaml.load(yaml_config, YamlLoader)
     config: ConfigModel = ConfigModel(**dict_config)
 
     if not config.logging.log_console:
@@ -44,8 +48,7 @@ def replace_value_to_environment(yaml_config: str) -> str:
     for value in values:
         environ_value: Optional[str] = os.environ.get(value)
         if not environ_value:
-            project_logger.error(f"Значение {value} в переменных окружениях пуст.")
-            exit(0)
+            raise ValueError(f"Значение {value} в переменных окружениях пуст.")
         pattern = rf"\${{{value}}}"
         yaml_config: str = re.sub(  # type: ignore
             pattern=pattern,
@@ -58,3 +61,9 @@ def replace_value_to_environment(yaml_config: str) -> str:
 
 def enable_file_logging(file: str, level: Union[str, int], logger, **kwargs) -> int:
     return logger.add(file, level=level, **kwargs)
+
+
+__all__ = (
+    "get_config_from_file",
+    "get_config",
+)

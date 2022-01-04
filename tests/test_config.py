@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from src.configurator import ConfigModel
+from src.configurator import ConfigModel, get_config
 
-from .defaults import EXAMPLE_CONFIG, get_config
+from .defaults import EXAMPLE_CONFIG, EXAMPLE_CONFIG_WITH_ENVIRONMENT_VALUES
 
 
-def test_config_model():
+def test_config_model_without_environment_values():
     """Тестирование преобразования"""
-    config: ConfigModel = get_config(config=EXAMPLE_CONFIG)
+    config: ConfigModel = get_config(string=EXAMPLE_CONFIG)
     assert isinstance(config, ConfigModel)
     assert config.bot.token == ["FirstToken", "SecondToken"]
     assert config.bot.admins == [1, 2, 3, 4]
@@ -45,3 +45,13 @@ def test_config_model():
     assert config.logging.log_console is True
     assert config.logging.log_path == "logs/%Y-%M-%d_%H-%M-%S.log"
     assert config.logging.log_errors_path == "logs/%Y-%M-%d_%H-%M-%S-error.log"
+
+
+def test_config_model_with_environment_values():
+    """Тестирование преобразования"""
+    try:
+        get_config(string=EXAMPLE_CONFIG_WITH_ENVIRONMENT_VALUES)
+    except ValueError:
+        assert True
+    else:
+        assert False
