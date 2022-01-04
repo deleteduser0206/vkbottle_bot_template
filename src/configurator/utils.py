@@ -11,6 +11,10 @@ from src.modules import logger as project_logger
 
 
 def get_config_from_file(filename: Union[str, bytes, os.PathLike]) -> ConfigModel:
+    """
+    Открывает файл,
+    вызывает функцию для получения конфига из yaml-подобной строки и возвращает конфиг
+    """
     with open(filename, "r") as f:
         config = get_config(f.read())
         f.close()
@@ -18,6 +22,7 @@ def get_config_from_file(filename: Union[str, bytes, os.PathLike]) -> ConfigMode
 
 
 def get_config(string: Union[str, bytes]) -> ConfigModel:
+    """Возвращает конфиг из yaml-подобной строки"""
     yaml_config: str = remove_comments_from_string(string)  # type: ignore
     yaml_config: str = replace_value_to_environment(yaml_config)  # type: ignore
     dict_config: dict = yaml.load(yaml_config, YamlLoader)
@@ -40,10 +45,12 @@ REMOVE_COMMENTS_FROM_STRING_PATTERN = re.compile(r"(?m)^ *#.*\n?")
 
 
 def remove_comments_from_string(string: str):
+    """Удаляет комментарии из строки"""
     return REMOVE_COMMENTS_FROM_STRING_PATTERN.sub("", string)
 
 
 def replace_value_to_environment(yaml_config: str) -> str:
+    """Заменяет значения вида ${first_token} на значение first_token из переменных окружения"""
     values = FINDALL_VALUES_PATTERN.findall(yaml_config)
     for value in values:
         environ_value: Optional[str] = os.environ.get(value)
