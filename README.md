@@ -21,17 +21,15 @@
 - [middlewares](src/middlewares) - прослойка для выполнения действий до/после обработки
   события. [(?)](https://vkbottle.readthedocs.io/ru/latest/high-level/handling/middleware/)
 - [rules](src/rules) - правила. [(?)](https://vkbottle.readthedocs.io/ru/latest/tutorial/rules/)
+- [configurator](src/configurator) - модуль с конфигурацией проекта, которая берётся из файла config.yml, переменных окружения(опционально).
 - [database](src/database)
     - [models](src/database/models) - модели, инициализация базы данных.
     - [repositories](src/database/repositories) - репозитории.
 - [utils](src/utils) - утилиты, которые почему-то не должны находиться в том файле, где они используются.
 - [web](src/web) - веб-часть проекта, в виде сервера используется aiohttp.web.
-- [custom](src/custom) - часть проекта для модифицированных модулей.
 - [\_\_main\_\_.py](src/__main__.py) - точка входа. Необходим для запуска приложений.
 - [app.py](src/app.py) - инициализация/настройка приложений, содержит экземпляр бота & веб приложения.
 - [bot.py](src/bot.py) - модифицированный класс создания бота.
-- [configurator.py](src/configurator.py) - модуль с конфигурацией проекта, которая берётся из файла config.yml,
-  переменных окружения(опционально).
 - [initialize.py](src/initialize.py) - запуск синхронных/асинхронных функций при старте проекта.
 - [modules.py](src/modules.py) - легко-заменяемые модули, с которыми могут быть проблемы на разных платформах/версиях.
   Так же здесь присутствует модуль логирования.

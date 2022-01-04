@@ -45,6 +45,3 @@ def test_config_model():
     assert config.logging.log_console is True
     assert config.logging.log_path == "logs/%Y-%M-%d_%H-%M-%S.log"
     assert config.logging.log_errors_path == "logs/%Y-%M-%d_%H-%M-%S-error.log"
-
-    assert config.environment.status is False
-    assert config.environment.translate["bot"]["token"] == "vk_token"
