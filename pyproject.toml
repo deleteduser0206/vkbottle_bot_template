@@ -13,19 +13,18 @@ aiohttp-socks = "^0.7.1"
 
 # VKBottle
 vkbottle = "^4.0.1"
-vkbottle-types = {url = "https://github.com/timoniq/vkbottle-types/archive/master.zip"}
+
+# Logging
 loguru = "^0.5.3"
 
-# Config
+# For config
 PyYAML = "^6.0"
 types-PyYAML = "^6.0.1"
 
 # Database
 aiomysql = "^0.0.22"
-SQLAlchemy = "^1.4.27"
-
-# Cache
 aioredis = "^2.0.0"
+SQLAlchemy = "^1.4.27"
 
 # For fast work
 orjson = "^3.6.4"
