@@ -10,7 +10,7 @@ class UnknownCommandMiddleware(BaseMiddleware[Message]):
         то отправляет пользователю сообщение о том,
         что команда не найдена
         """
-        if not self.handlers and not self.event.__dict__.get("peer_id") >= 2e9:
+        if not self.handlers and self.event.__dict__.get("peer_id") <= 2e9:
             await self.event.answer(
                 "Команда не найдена.\nВведите /help для получения списка команд."
             )

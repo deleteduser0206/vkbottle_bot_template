@@ -3,7 +3,7 @@
 from aiohttp.web import Request, Response, RouteTableDef
 
 from src.configurator import config
-from src.modules import json, logger
+from src.modules import json
 
 routes = RouteTableDef()
 
@@ -18,19 +18,16 @@ async def confirmation_handler(req: Request):
     """
     try:
         data = await req.json(loads=json.loads)
-        logger.info(data)
     except:  # noqa
         return Response(status=400, text="error")
 
-    if data.get("type") == "confirmation":
-        if not config.bot.info.confirmation:
-            from src.app import bot
+    if data.get("type") == "confirmation" and not config.bot.info.confirmation:
+        from src.app import bot
 
-            config.bot.info.confirmation = (
-                await bot.api.groups.get_callback_confirmation_code(group_id=data["group_id"])
-            ).code
-            logger.info(config.bot.info.confirmation)
-            return Response(text=config.bot.info.confirmation)
+        config.bot.info.confirmation = (
+            await bot.api.groups.get_callback_confirmation_code(group_id=data["group_id"])
+        ).code
+        return Response(text=config.bot.info.confirmation)
 
     return Response(status=400, text="error")
 

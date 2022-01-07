@@ -15,7 +15,4 @@ class IsAdminRule(ABCRule[Message]):
         Функция проверяет что пользователь,
         который отправил команду предназначенную для администраторов, является ним
         """
-        if event.from_id in self.config.bot.admins:
-            return True
-
-        return False
+        return event.from_id in self.config.bot.admins
