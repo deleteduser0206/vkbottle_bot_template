@@ -68,8 +68,8 @@ class Bot(ABCFramework):
             from aiohttp_socks.connector import ProxyConnector
             from vkbottle.http.aiohttp import AiohttpClient
         except ModuleNotFoundError:
-            logger.warning(
-                "Прокси не был установлен, так как зависимость 'aiohttp-socks' не найдена"
+            logger.error(
+                "Прокси не был установлен, так как зависимость 'aiohttp-socks' не установлена"
             )
         else:
             self.api.http_client = AiohttpClient(
