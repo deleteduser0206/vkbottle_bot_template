@@ -48,7 +48,7 @@ def test_config_model_without_environment_values():
 
 
 def test_config_model_with_environment_values():
-    """Тестирование преобразования"""
+    """Тестирование преобразования конфига со значениями переменных окружения"""
     try:
         get_config(string=EXAMPLE_CONFIG_WITH_ENVIRONMENT_VALUES)
     except ValueError:
