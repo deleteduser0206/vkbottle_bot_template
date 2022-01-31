@@ -15,7 +15,7 @@ aiohttp-socks = "^0.7.1"
 vkbottle = "^4.0.1"
 
 # Logging
-loguru = "^0.5.3"
+loguru = "^0.6.0"
 
 # For config
 PyYAML = "^6.0"
