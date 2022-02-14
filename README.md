@@ -117,7 +117,7 @@ nano config.yml
 docker-compose up --build
 # Сборка и запуск контейнеров в фоновом режиме
 docker-compose up --build -d
-# Остановить контейнеры поле запуска в фоновом режиме
+# Остановить контейнеры после запуска в фоновом режиме
 docker-compose down
 ```
 
